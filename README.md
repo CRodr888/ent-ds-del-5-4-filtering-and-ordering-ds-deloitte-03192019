@@ -49,9 +49,6 @@ c = conn.cursor()
 
 ```python
 # create database connection here
-import sqlite3 
-conn = sqlite3.connect('pets_database.db')
-c = conn.cursor()
 ```
 
 Let's check out our `cats` table now:
@@ -65,20 +62,7 @@ c.execute('''SELECT * FROM cats;''').fetchall()
 
 ```python
 # select all data from cats data here
-c.execute('''SELECT * FROM cats;''').fetchall()
 ```
-
-
-
-
-    [(1, 'Maru', 3, 'Scottish Fold', 1),
-     (2, 'Hana', 1, 'Tabby', 1),
-     (3, "Lil\\' Bub", 5, 'American Shorthair', None),
-     (4, 'Moe', 10, 'Tabby', None),
-     (5, 'Patches', 2, 'Calico', None),
-     (6, None, None, 'Tabby', None)]
-
-
 
 This should return:
 
@@ -108,20 +92,7 @@ c.execute('''SELECT * FROM cats ORDER BY age;''').fetchall()
 
 ```python
 # select all cats order by age here
-c.execute('''SELECT * FROM cats ORDER BY age;''').fetchall()
 ```
-
-
-
-
-    [(6, None, None, 'Tabby', None),
-     (2, 'Hana', 1, 'Tabby', 1),
-     (5, 'Patches', 2, 'Calico', None),
-     (1, 'Maru', 3, 'Scottish Fold', 1),
-     (3, "Lil\\' Bub", 5, 'American Shorthair', None),
-     (4, 'Moe', 10, 'Tabby', None)]
-
-
 
 This should return the following:
 
@@ -143,20 +114,7 @@ c.execute('''SELECT * FROM cats ORDER BY age DESC;''').fetchall()
 
 ```python
 # select cats order by age descending here
-c.execute('''SELECT * FROM cats ORDER BY age DESC;''').fetchall()
 ```
-
-
-
-
-    [(4, 'Moe', 10, 'Tabby', None),
-     (3, "Lil' Bub", 5, 'American Shorthair', None),
-     (1, 'Maru', 3, 'Scottish Fold', 1),
-     (5, 'Patches', 2, 'Calico', None),
-     (2, 'Hana', 1, 'Tabby', 1),
-     (6, None, None, 'Tabby', None)]
-
-
 
 This should return
 
@@ -183,17 +141,10 @@ SELECT * FROM cats ORDER BY age DESC LIMIT 1;
 
 
 ```python
-c.execute('''SELECT * FROM cats ORDER BY age DESC LIMIT 1;''').fetchone()
+# c.execute('''SELECT * FROM cats ORDER BY age DESC LIMIT 1;''').fetchone()
 # OR
 # c.execute('''SELECT * FROM cats ORDER BY age DESC;''').fetchone() # returns the same element as the above
 ```
-
-
-
-
-    (4, 'Moe', 10, 'Tabby', None)
-
-
 
 This part of the statement: `SELECT * FROM cats ORDER BY age DESC` returns all of the cats in order from oldest to youngest. Setting a `LIMIT` of `1` returns just the first, i.e. oldest, cat on the list.
 
@@ -211,15 +162,7 @@ SELECT * FROM cats ORDER BY age DESC LIMIT 2;
 
 ```python
 # select the two oldest cats here
-c.execute('''SELECT * FROM cats ORDER BY age DESC LIMIT 2;''').fetchall()
 ```
-
-
-
-
-    [(4, 'Moe', 10, 'Tabby', None), (3, "Lil' Bub", 5, 'American Shorthair', None)]
-
-
 
 Execute that statement and you should see:
 
@@ -244,15 +187,7 @@ SELECT name FROM cats WHERE age BETWEEN 1 AND 3;
 
 ```python
 # find all records between ages 1 and three here
-c.execute('''SELECT name FROM cats WHERE age BETWEEN 1 AND 3;''').fetchall()
 ```
-
-
-
-
-    [('Maru',), ('Hana',), ('Patches',)]
-
-
 
 This should return:
 
@@ -271,15 +206,7 @@ SELECT * FROM cats WHERE Name IS NULL;
 
 ```python
 # select cats where the name field is null here
-c.execute('''SELECT * FROM cats WHERE Name IS NULL;''').fetchall()
 ```
-
-
-
-
-    [(6, None, None, 'Tabby', None)]
-
-
 
 This should return the following:
 
@@ -307,15 +234,7 @@ SELECT COUNT(owner_id) FROM cats WHERE owner_id = 1;
 
 ```python
 # retrieve the count of cats whose owner id = 1 here
-c.execute('''SELECT COUNT(owner_id) FROM cats WHERE owner_id = 1;''').fetchall()
 ```
-
-
-
-
-    [(2,)]
-
-
 
 This should return:
 
@@ -353,15 +272,7 @@ SELECT breed, COUNT(breed) FROM cats GROUP BY breed;
 
 ```python
 # execute GROUP BY sql statement here
-c.execute('''SELECT breed, COUNT(breed) FROM cats GROUP BY breed;''').fetchall()
 ```
-
-
-
-
-    [('American Shorthair', 1), ('Calico', 1), ('Scottish Fold', 1), ('Tabby', 3)]
-
-
 
 This should return
 
@@ -379,19 +290,7 @@ SELECT breed, owner_id, COUNT(breed) FROM cats GROUP BY breed, owner_id;
 
 ```python
 # execute multiple column group by statement here
-c.execute('''SELECT breed, owner_id, COUNT(breed) FROM cats GROUP BY breed, owner_id;''').fetchall()
 ```
-
-
-
-
-    [('American Shorthair', None, 1),
-     ('Calico', None, 1),
-     ('Scottish Fold', 1, 1),
-     ('Tabby', None, 2),
-     ('Tabby', 1, 1)]
-
-
 
 This should return:
 
